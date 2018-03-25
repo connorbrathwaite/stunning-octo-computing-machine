@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as R from 'ramda'
 import {
   FlatList,
   Text,
@@ -9,49 +10,9 @@ import {
 import {gql} from 'apollo-boost'
 import {Query} from 'react-apollo'
 import {ListItem} from 'react-native-elements'
-import * as R from 'ramda'
+import {getReposByName} from '../queries'
 
 const isFetchingMore = R.equals(R.always(4))
-export const getRepoByOwnerAndName = gql`
-  query {
-    repository(owner: "facebook", name: "react") {
-      id
-      nameWithOwner
-      homepageUrl
-      watchers(first: 5) {
-        edges {
-          node {
-            id
-            avatarUrl
-            name
-          }
-        }
-      }
-    }
-  }
-`
-
-const getReposByName = gql`
-  query($name: String!) {
-    search(query: $name, type: REPOSITORY, first: 10) {
-      repositoryCount
-      nodes {
-        ... on Repository {
-          id
-          name
-          owner {
-            id
-            login
-          }
-        }
-      }
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-    }
-  }
-`
 
 const styles = StyleSheet.create({
   container: {
