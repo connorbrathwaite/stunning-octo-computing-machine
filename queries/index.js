@@ -1,15 +1,24 @@
 import {gql} from 'apollo-boost'
 export const getReposByName = gql`
-  query($name: String!) {
-    search(query: $name, type: REPOSITORY, first: 10) {
+  query($name: String!, $cursor: String) {
+    search(
+      query: $name
+      type: REPOSITORY
+      first: 10
+      after: $cursor
+    ) {
       repositoryCount
       nodes {
         ... on Repository {
           id
           name
+          stargazers {
+            totalCount
+          }
           owner {
             id
             login
+            avatarUrl
           }
         }
       }

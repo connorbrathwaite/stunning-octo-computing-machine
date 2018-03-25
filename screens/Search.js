@@ -14,9 +14,9 @@ function Search({
       <Text style={styles.title}>Aurity Assignment</Text>
       <SearchBar
         lightTheme
-        onChangeText={setInputQuery}
         onClear={clearInputQuery}
-        placeholder="Type Here..."
+        onEndEditing={setInputQuery}
+        placeholder="Search for repositories by keyword here"
       />
       <SearchList inputQuery={inputQuery} />
     </View>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 const initialState = {inputQuery: ''}
 
 const stateHandlers = {
-  setInputQuery: state => inputQuery => ({inputQuery}),
+  setInputQuery: state => e => ({inputQuery: e.nativeEvent.text}),
   clearInputQuery: state => () => initialState
 }
 

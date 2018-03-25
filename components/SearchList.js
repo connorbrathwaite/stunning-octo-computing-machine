@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   }
 })
 function SearchList({inputQuery}) {
+  if (inputQuery === '') return null
   return (
     <Query
       query={getReposByName}
@@ -41,7 +42,7 @@ function SearchList({inputQuery}) {
         fetchMore,
         networkStatus
       }) => {
-        if (loading)
+        if (loading || R.isEmpty(data))
           return (
             <View
               style={[styles.container, styles.horizontal]}
@@ -75,7 +76,50 @@ function SearchList({inputQuery}) {
             keyExtractor={R.prop('id')}
             refreshing={isFetchingMore(networkStatus)}
             onRefresh={refetch}
-            onEndReachedThreshold={0.5}
+            onEndReachedThreshold={0.8}
+            onEndReached={() =>
+              fetchMore({
+                variables: {
+                  cursor: R.prop('endCursor', pageInfo)
+                },
+                updateQuery: (
+                  previousResult,
+                  {fetchMoreResult}
+                ) => {
+                  if (
+                    fetchMoreResult.search.nodes.length ===
+                    0
+                  ) {
+                    return previousResult
+                  }
+                  const {
+                    search: {
+                      __typename,
+                      nodes: pNodes,
+                      pageInfo: pPageInfo
+                    }
+                  } = previousResult
+
+                  const {
+                    search: {
+                      nodes: nextNodes,
+                      pageInfo: nextPageInfo,
+                      repositoryCount: nextRepositoryCount
+                    }
+                  } = fetchMoreResult
+
+                  console.log(previousResult)
+                  return {
+                    search: {
+                      repositoryCount: nextRepositoryCount,
+                      pageInfo: nextPageInfo,
+                      __typename,
+                      nodes: R.concat(pNodes, nextNodes)
+                    }
+                  }
+                }
+              })
+            }
             ListEmptyComponent={
               <Text>
                 No repositories found for {inputQuery} :'(
