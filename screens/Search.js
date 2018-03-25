@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {withStateHandlers} from 'recompose'
-import {Text, View, StyleSheet} from 'react-native'
-import {SearchBar} from 'react-native-elements'
+import {View, StyleSheet, Switch} from 'react-native'
+import {Text, SearchBar} from 'react-native-elements'
 import SearchList from '../components/SearchList'
 
 function Search({
@@ -11,7 +11,7 @@ function Search({
 }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Aurity Assignment</Text>
+      <Text h1 style={styles.title}>Aurity Assignment</Text>
       <SearchBar
         lightTheme
         onClear={clearInputQuery}
@@ -25,8 +25,7 @@ function Search({
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 24,
-    margin: 20
+    margin: 16
   },
   container: {
     flex: 1,

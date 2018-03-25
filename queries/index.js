@@ -12,9 +12,6 @@ export const getReposByName = gql`
         ... on Repository {
           id
           name
-          stargazers {
-            totalCount
-          }
           owner {
             id
             login

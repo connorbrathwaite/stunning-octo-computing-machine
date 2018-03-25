@@ -13,7 +13,12 @@ import {Query} from 'react-apollo'
 import {ListItem} from 'react-native-elements'
 import {getReposByName} from '../queries'
 
+
 const isFetchingMore = R.equals(R.always(4))
+
+const isLoading = R.equals(R.always(1))
+
+const isFetching = R.anyPass([isFetchingMore, isLoading])
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +32,6 @@ const styles = StyleSheet.create({
   }
 })
 function SearchList({inputQuery}) {
-  if (inputQuery === '') return null
   return (
     <Query
       query={getReposByName}
@@ -42,14 +46,15 @@ function SearchList({inputQuery}) {
         fetchMore,
         networkStatus
       }) => {
-        if (loading || R.isEmpty(data))
-          return (
-            <View
-              style={[styles.container, styles.horizontal]}
-            >
-              <ActivityIndicator size="large" />
-            </View>
-          )
+        // if (loading) {
+        //   return (
+        //     <View
+        //       style={[styles.container, styles.horizontal]}
+        //     >
+        //       <ActivityIndicator size="large" />
+        //     </View>
+        //   )
+        // }
 
         if (error) {
           return (
@@ -64,34 +69,34 @@ function SearchList({inputQuery}) {
           )
         }
 
-        const {
-          nodes,
-          repositoryCount,
-          pageInfo
-        } = data.search
-
+        // onRefresh = {refetch}
         return (
           <FlatList
-            data={nodes}
+            data={R.pathOr([], ['search', 'nodes'], data)}
             keyExtractor={R.prop('id')}
-            refreshing={isFetchingMore(networkStatus)}
-            onRefresh={refetch}
+            refreshing={isFetching(networkStatus)}
             onEndReachedThreshold={0.8}
             onEndReached={() =>
               fetchMore({
                 variables: {
-                  cursor: R.prop('endCursor', pageInfo)
+                  cursor: R.pathOr(
+                    undefined,
+                    ['search', 'pageInfo', 'endCursor'],
+                    data
+                  )
                 },
                 updateQuery: (
                   previousResult,
                   {fetchMoreResult}
                 ) => {
+                  console.log(previousResult)
                   if (
                     fetchMoreResult.search.nodes.length ===
                     0
                   ) {
                     return previousResult
                   }
+
                   const {
                     search: {
                       __typename,
@@ -108,7 +113,6 @@ function SearchList({inputQuery}) {
                     }
                   } = fetchMoreResult
 
-                  console.log(previousResult)
                   return {
                     search: {
                       repositoryCount: nextRepositoryCount,
@@ -127,8 +131,12 @@ function SearchList({inputQuery}) {
             }
             ListHeaderComponent={
               <Text>
-                {repositoryCount} repositories containing{' '}
-                {inputQuery}
+                {R.pathOr(
+                  [],
+                  ['search', 'repositoryCount'],
+                  data
+                )}{' '}
+                repositories containing {inputQuery}
               </Text>
             }
             renderItem={({item}) =>
