@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
     padding: 10
   }
 })
-export default function SearchList() {
+export default function SearchList({inputQuery}) {
   return (
     <Query
       query={getReposByName}
-      variables={{name: 'react'}}
+      variables={{name: inputQuery}}
       notifyOnNetworkStatusChange
     >
       {({
@@ -66,17 +66,24 @@ export default function SearchList() {
             refreshing={isFetchingMore(networkStatus)}
             onRefresh={refetch}
             onEndReachedThreshold={0.5}
-            ListEmptyComponent={() => (
-              <Text>No repositories found :'(</Text>
-            )}
-            ListHeaderComponent={() => (
+            ListEmptyComponent={
               <Text>
-                {repositoryCount} repositories found
+                No repositories found for {inputQuery} :'(
               </Text>
-            )}
+            }
+            ListHeaderComponent={
+              <Text>
+                {repositoryCount} repositories containing{' '}
+                {inputQuery}
+              </Text>
+            }
             renderItem={({item}) =>
               item ? (
-                <ListItem key={item.id} title={item.name} />
+                <ListItem
+                  key={item.id}
+                  title={item.owner.login}
+                  subtitle={item.name}
+                />
               ) : null
             }
           />
