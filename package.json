@@ -1,0 +1,33 @@
+{
+  "name": "aurity-challenge",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "jest-expo": "25.0.0",
+    "prettier": "^1.11.1",
+    "react-native-scripts": "1.11.1",
+    "react-test-renderer": "16.2.0"
+  },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "ant-mobile": "^0.0.0",
+    "apollo-boost": "^0.1.3",
+    "expo": "^25.0.0",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
+    "ramda": "^0.25.0",
+    "react": "16.2.0",
+    "react-apollo": "^2.1.0",
+    "react-native": "0.52.0"
+  }
+}
