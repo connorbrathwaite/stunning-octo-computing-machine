@@ -50,6 +50,7 @@ export default function SearchList({inputQuery}) {
           )
 
         if (error) {
+          console.log(error)
           data = require('./mock').default.data
           // return null // TODO <Error {...error} />
         }
