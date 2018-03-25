@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as R from 'ramda'
+import {branch, renderNothing} from 'recompose'
 import {
   FlatList,
   Text,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     padding: 10
   }
 })
-export default function SearchList({inputQuery}) {
+function SearchList({inputQuery}) {
   return (
     <Query
       query={getReposByName}
@@ -50,9 +51,16 @@ export default function SearchList({inputQuery}) {
           )
 
         if (error) {
-          console.log(error)
-          data = require('./mock').default.data
-          // return null // TODO <Error {...error} />
+          return (
+            <View
+              style={[styles.container, styles.horizontal]}
+            >
+              <Text>
+                Oops something went wrong, have you
+                configured your access token correctly?
+              </Text>
+            </View>
+          )
         }
 
         const {
@@ -60,6 +68,7 @@ export default function SearchList({inputQuery}) {
           repositoryCount,
           pageInfo
         } = data.search
+
         return (
           <FlatList
             data={nodes}
@@ -93,3 +102,11 @@ export default function SearchList({inputQuery}) {
     </Query>
   )
 }
+
+const branchPredicate = R.pipe(
+  R.prop('inputQuery'),
+  R.isEmpty
+)
+export default branch(branchPredicate, renderNothing)(
+  SearchList
+)
