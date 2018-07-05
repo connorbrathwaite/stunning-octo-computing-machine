@@ -248,10 +248,6 @@ ansi@^0.3.0, ansi@~0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/ansi/-/ansi-0.3.1.tgz#0c42d4fb17160d5a9af1e484bace1c66922c1b21"
 
-ant-mobile@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/ant-mobile/-/ant-mobile-0.0.0.tgz#3984d9f8803755e13c20489e0d1441b48a3f6d65"
-
 any-promise@^1.0.0, any-promise@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/any-promise/-/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
@@ -263,7 +259,7 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-apollo-boost@^0.1.3:
+apollo-boost@0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/apollo-boost/-/apollo-boost-0.1.3.tgz#5f83af503e5482811867341d2e28cffd42da6bae"
   dependencies:
@@ -2320,7 +2316,7 @@ expect@^22.4.3:
     jest-message-util "^22.4.3"
     jest-regex-util "^22.4.3"
 
-expo@^25.0.0:
+expo@25.0.0:
   version "25.0.0"
   resolved "https://registry.yarnpkg.com/expo/-/expo-25.0.0.tgz#791d0052e159d56854a84d90540bf11c33abfe4d"
   dependencies:
@@ -2886,11 +2882,11 @@ graphql-anywhere@^4.1.0-alpha.0, graphql-anywhere@^4.1.7:
   dependencies:
     apollo-utilities "^1.0.10"
 
-graphql-tag@^2.4.2, graphql-tag@^2.8.0:
+graphql-tag@2.8.0, graphql-tag@^2.4.2:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.8.0.tgz#52cdea07a842154ec11a2e840c11b977f9b835ce"
 
-graphql@^0.13.2:
+graphql@0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
   dependencies:
@@ -5206,7 +5202,7 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.11.1:
+prettier@1.11.1:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.11.1.tgz#61e43fc4cd44e68f2b0dfc2c38cd4bb0fccdcc75"
 
@@ -5328,7 +5324,7 @@ querystring@0.2.0, querystring@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-ramda@^0.25.0:
+ramda@0.25.0:
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
 
@@ -5391,7 +5387,7 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-apollo@^2.1.0:
+react-apollo@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-2.1.0.tgz#b94c4aca513776d90c368f20a65f99e98fdfea17"
   dependencies:
@@ -5420,7 +5416,7 @@ react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
 
-react-native-elements@^0.19.0:
+react-native-elements@0.19.0:
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.19.0.tgz#737c5198bf7487f9986e2023826cd0bd7a500366"
   dependencies:
@@ -5651,7 +5647,7 @@ realpath-native@^1.0.0:
   dependencies:
     util.promisify "^1.0.0"
 
-recompose@^0.26.0:
+recompose@0.26.0:
   version "0.26.0"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.26.0.tgz#9babff039cb72ba5bd17366d55d7232fbdfb2d30"
   dependencies:
