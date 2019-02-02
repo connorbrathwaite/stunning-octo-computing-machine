@@ -13,7 +13,6 @@ import {Query} from 'react-apollo'
 import {ListItem} from 'react-native-elements'
 import {getReposByName} from '../queries'
 
-
 const isFetchingMore = R.equals(R.always(4))
 
 const isLoading = R.equals(R.always(1))
@@ -46,15 +45,15 @@ function SearchList({inputQuery}) {
         fetchMore,
         networkStatus
       }) => {
-        // if (loading) {
-        //   return (
-        //     <View
-        //       style={[styles.container, styles.horizontal]}
-        //     >
-        //       <ActivityIndicator size="large" />
-        //     </View>
-        //   )
-        // }
+        if (loading) {
+          return (
+            <View
+              style={[styles.container, styles.horizontal]}
+            >
+              <ActivityIndicator size="large" />
+            </View>
+          )
+        }
 
         if (error) {
           return (
